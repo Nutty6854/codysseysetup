@@ -43,7 +43,7 @@ README에서 모든 수행 결과로 바로 이동할 수 있도록 주제별 �
 | [CLI와 파일 권한 실습](docs/01-cli-permissions.md) | 생성·복사·이동·삭제, 절대·상대 경로, `chmod` | `pwd`, `ls -la`, 권한 변경 전·후 |
 | [Docker 설치와 기본 운영](docs/02-docker-basics.md) | OrbStack, hello-world, Ubuntu, 컨테이너 운영 | `docker info`, `ps -a`, `logs`, `stats`, `exec` |
 | [커스텀 NGINX 이미지와 포트 매핑](docs/03-custom-nginx-port.md) | Dockerfile, 이미지 빌드, NGINX 실행, 포트 공개 | `docker build`, `docker port`, `curl`, 브라우저 |
-| [바인드 마운트와 Docker 볼륨](docs/04-storage.md) | 호스트 변경 반영, 컨테이너 삭제 후 데이터 유지 | 변경 전·후 `curl`, 새 컨테이너에서 파일 확인 |
+| [바인드 마운트와 Docker 볼륨]확인ocs/04-storage.md) | 호스트 변경 반영, 컨테이너 삭제 후 데이터 유지 | 변경 전·후 `curl`, 새 컨테이너에서 파일 확인 |
 | [Git 및 GitHub 연동](docs/05-git-github.md) | 사용자·브랜치 설정, remote, commit/push | `git config`, `remote -v`, `git log` |
 | [트러블슈팅](docs/06-troubleshooting.md) | Docker 인식, 셸 입력, 경로 오타, Git 저장소 경계 | 문제 → 원인 가설 → 확인 → 해결 |
 

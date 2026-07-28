@@ -13,7 +13,7 @@ $ git config --get user.name
 “Nutty6854”
 
 $ git config --get user.email
-[개인정보 보호를 위해 마스킹 — 설정 완료]
+"choiwj0520@gmail.com"
 
 $ git config --get init.defaultBranch
 main
