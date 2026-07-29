@@ -9,19 +9,19 @@
 프로젝트 루트에서 변경 전 HTML을 준비했습니다. 다음은 같은 파일을 재현할 수 있는 명령입니다.
 
 ```bash
-$ mkdir -p custom-nginx/bind-app
-$ printf '<!DOCTYPE html>\n<html lang="ko">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>Bind Mount Practice</title>\n</head>\n<body>\n  <h1>바인드 마운트 변경 전</h1>\n</body>\n</html>\n' > custom-nginx/bind-app/index.html
+mkdir -p custom-nginx/bind-app
+printf '<!DOCTYPE html>\n<html lang="ko">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>Bind Mount Practice</title>\n</head>\n<body>\n  <h1>바인드 마운트 변경 전</h1>\n</body>\n</html>\n' > custom-nginx/bind-app/index.html
 ```
 
 호스트의 `bind-app` 디렉토리를 NGINX 문서 경로에 읽기 전용으로 연결하고 8081번 포트로 실행했습니다. `$(pwd)`를 사용하면 사용자마다 다른 프로젝트 절대 경로를 현재 위치에서 생성할 수 있습니다.
 
 ```bash
-$ docker run -d --name codyssey-bind -p 8081:80 \
+docker run -d --name codyssey-bind -p 8081:80 \
   --mount type=bind,source="$(pwd)/custom-nginx/bind-app",target=/usr/share/nginx/html,readonly \
   nginx:alpine
 8181c17fd4dfb24179ed1e0277e908f9389edcf14aa2045348511aff7a9fdc9f
 
-$ docker ps --filter name=codyssey-bind --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
+docker ps --filter name=codyssey-bind --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
 NAMES           STATUS         PORTS
 codyssey-bind   Up 9 seconds   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp
 ```
@@ -29,7 +29,8 @@ codyssey-bind   Up 9 seconds   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp
 변경 전 응답을 확인했습니다.
 
 ```bash
-$ curl -sS http://localhost:8081
+curl -sS http://localhost:8081
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -46,9 +47,9 @@ $ curl -sS http://localhost:8081
 컨테이너를 재시작하지 않고 호스트 파일의 제목을 변경한 뒤 다시 요청했습니다.
 
 ```bash
-$ printf '<!DOCTYPE html>\n<html lang="ko">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>Bind Mount Practice</title>\n</head>\n<body>\n  <h1>바인드 마운트 변경 반영 완료</h1>\n</body>\n</html>\n' > custom-nginx/bind-app/index.html
+printf '<!DOCTYPE html>\n<html lang="ko">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>Bind Mount Practice</title>\n</head>\n<body>\n  <h1>바인드 마운트 변경 반영 완료</h1>\n</body>\n</html>\n' > custom-nginx/bind-app/index.html
 
-$ curl -sS http://localhost:8081
+curl -sS http://localhost:8081
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -65,7 +66,7 @@ $ curl -sS http://localhost:8081
 마운트 유형과 읽기 전용 설정도 확인했습니다.
 
 ```bash
-$ docker inspect codyssey-bind --format 'Type={{(index .Mounts 0).Type}} Source={{(index .Mounts 0).Source}} Destination={{(index .Mounts 0).Destination}} RW={{(index .Mounts 0).RW}}'
+docker inspect codyssey-bind --format 'Type={{(index .Mounts 0).Type}} Source={{(index .Mounts 0).Source}} Destination={{(index .Mounts 0).Destination}} RW={{(index .Mounts 0).RW}}'
 Type=bind Source=/Users/wonjun/Developer/codyssey/codysseysetup/custom-nginx/bind-app Destination=/usr/share/nginx/html RW=false
 ```
 

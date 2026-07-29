@@ -9,24 +9,24 @@ Git은 로컬 파일의 변경 이력과 브랜치를 관리하는 버전 관리
 사용자 정보와 기본 브랜치 설정을 확인했습니다. 공개 문서에는 이메일 주소를 노출하지 않도록 마스킹했습니다.
 
 ```bash
-$ git config --get user.name
+git config --get user.name
 “Nutty6854”
 
-$ git config --get user.email
+git config --get user.email
 "choiwj0520@gmail.com"
 
-$ git config --get init.defaultBranch
+git config --get init.defaultBranch
 main
 ```
 
 원격 저장소 연결과 현재 커밋을 확인했습니다.
 
 ```bash
-$ git remote -v
+git remote -v
 origin  https://github.com/Nutty6854/codysseysetup.git (fetch)
 origin  https://github.com/Nutty6854/codysseysetup.git (push)
 
-$ git log --oneline --decorate -2
+git log --oneline --decorate -2
 b9423e7 (HEAD -> main, origin/main, origin/HEAD) Add local project
 804cf0a Initial commit
 ```
